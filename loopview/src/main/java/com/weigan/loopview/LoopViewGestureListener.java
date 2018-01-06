@@ -22,4 +22,14 @@ final class LoopViewGestureListener extends android.view.GestureDetector.SimpleO
         loopView.scrollBy(velocityY);
         return true;
     }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return !loopView.onItemClick(e);
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return loopView.onScroll(e1, e2, distanceX, distanceY);
+    }
 }

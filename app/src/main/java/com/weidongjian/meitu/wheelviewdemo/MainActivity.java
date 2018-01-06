@@ -3,10 +3,12 @@ package com.weidongjian.meitu.wheelviewdemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.weigan.loopview.LoopView;
+import com.weigan.loopview.OnItemClickListener;
 import com.weigan.loopview.OnItemSelectedListener;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private Toast toast;
+    private String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +30,30 @@ public class MainActivity extends AppCompatActivity {
             list.add("item " + i);
         }
         //设置是否循环播放
-//        loopView.setNotLoop();
+        loopView.setNotLoop();
         //滚动监听
         loopView.setListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
+//                if (toast == null) {
+//                    toast = Toast.makeText(MainActivity.this, "item " + index, Toast.LENGTH_SHORT);
+//                }
+//                toast.setText("item " + index);
+//                toast.show();
+                Log.d(TAG, "onItemSelect index=" + index);
+            }
+        });
+
+        loopView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int index) {
                 if (toast == null) {
-                    toast = Toast.makeText(MainActivity.this, "item " + index, Toast.LENGTH_SHORT);
+                    toast = Toast.makeText(MainActivity.this, "click item " + index, Toast.LENGTH_SHORT);
                 }
-                toast.setText("item " + index);
+                toast.setText("click item " + index);
                 toast.show();
+
+                Log.d(TAG, "onItemClick index=" + index);
             }
         });
         //设置原始数据

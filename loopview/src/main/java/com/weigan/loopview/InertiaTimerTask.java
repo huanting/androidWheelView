@@ -43,10 +43,12 @@ final class InertiaTimerTask implements Runnable {
         loopview.totalScrollY = loopview.totalScrollY - i;
         if (!loopView.isLoop) {
             float itemHeight = loopView.lineSpacingMultiplier * loopView.maxTextHeight;
+            //已经到第一项
             if (loopView.totalScrollY <= (int) ((float) (-loopView.initPosition) * itemHeight)) {
                 a = 40F;
                 loopView.totalScrollY = (int) ((float) (-loopView.initPosition) * itemHeight);
             } else if (loopView.totalScrollY >= (int) ((float) (loopView.items.size() - 1 - loopView.initPosition) * itemHeight)) {
+                //滑动到最后一项
                 loopView.totalScrollY = (int) ((float) (loopView.items.size() - 1 - loopView.initPosition) * itemHeight);
                 a = -40F;
             }
