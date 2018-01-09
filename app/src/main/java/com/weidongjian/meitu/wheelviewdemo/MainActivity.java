@@ -1,12 +1,19 @@
 package com.weidongjian.meitu.wheelviewdemo;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.weigan.loopview.LoopAdapter;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemClickListener;
 import com.weigan.loopview.OnItemSelectedListener;
@@ -24,13 +31,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final LoopView loopView = (LoopView) findViewById(R.id.loopView);
+        //设置渐进色
+//        loopView.setTopShaderCallback(new LoopView.TextShaderCallback() {
+//            @Override
+//            public void setShader(Paint paint, int x0, int y0, int x1, int y1) {
+//                Shader shader = new LinearGradient(x0, y0, x0, y1, new int[] {0xFFFF0000, 0xFF00FF00, 0xFF0000FF}, null, Shader.TileMode.CLAMP);
+//                paint.setShader(shader);
+//            }
+//        });
+//
+//        loopView.setCenterShaderCallback(new LoopView.TextShaderCallback() {
+//            @Override
+//            public void setShader(Paint paint, int x0, int y0, int x1, int y1) {
+//                Shader shader = new LinearGradient(x0, y0, x0, y1, new int[] {0xFFFF0000, 0xFF00FF00, 0xFF0000FF}, null, Shader.TileMode.CLAMP);
+//                paint.setShader(shader);
+//            }
+//        });
 
+//        loopView.setBottomTextColor(getColor(R.color.blue));
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 30  ; i++) {
             list.add("item " + i);
         }
+
         //设置是否循环播放
         loopView.setNotLoop();
+        loopView.setItemsVisibleCount(5);
         //滚动监听
         loopView.setListener(new OnItemSelectedListener() {
             @Override
@@ -57,7 +83,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //设置原始数据
-        loopView.setItems(list);
+//        loopView.setItems(list);
+        loopView.setAdapter(new LoopAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public String getDescription(int position) {
+                return list.get(position);
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return list.get(position);
+            }
+        });
 
         //设置初始位置
         loopView.setInitPosition(0);

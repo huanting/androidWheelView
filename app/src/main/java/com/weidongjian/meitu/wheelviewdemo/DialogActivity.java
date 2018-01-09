@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.weigan.loopview.LoopAdapter;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemSelectedListener;
 
@@ -57,8 +58,24 @@ public class DialogActivity extends AppCompatActivity {
             }
         });
         // 设置原始数据
-        loopView.setItems(list);
+//        loopView.setItems(list);
 
+        loopView.setAdapter(new LoopAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public String getDescription(int position) {
+                return list.get(position);
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return list.get(position);
+            }
+        });
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
     }
